@@ -4,32 +4,104 @@
 <meta charset="utf-8">
 <title>Example of Auto Loading Bootstrap Modal on Page Load</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="styles/main.css">
+<link rel="stylesheet" href="styles/visualizer.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src=""></script>
+<script src="js/papaparse.js"></script>
 <script>
-	$(document).ready(function(){
-		$("#myModal").modal('show');
-	});
+  var checked;
+  $(document).ready(
+    function(){
+  	  $("#myModal").modal('show');
+    }
+  );
+
+  function showPopUp(){
+    $("#myModal").modal('show');
+  }
+
+  function onClick(){
+      const csv = document.getElementById("fileUpload").files[0];
+/*
+      fs.readFile(csv,function (err,data) {
+
+      if (err) {
+        return console.log(err);
+      }
+
+//Convert and store csv information into a buffer.
+      bufferString = data.toString();
+
+//Store information for each individual person in an array index. Split it by every newline in the csv file.
+      arr = bufferString.split('\n');
+      console.log(arr);
+/*
+      for (i = 0; i < arr.length; i++) {
+          JSON.stringify(arr[i]);
+      }
+
+      JSON.parse(arr);
+      res.send(arr);*/
+    });
+    /*
+      if (checked){
+
+      }else{
+
+      }
+  }
+
+  function csvJSON(csv){
+    var lines=csv.split("\n");
+    var result = [];
+    var headers=lines[0].split(",");
+    for(var i=1;i<lines.length;i++){
+  	  var obj = {};
+  	  var currentline=lines[i].split(",");
+  	  for(var j=0;j<headers.length;j++){
+  		  obj[headers[j]] = currentline[j];
+  	  }
+  	  result.push(obj);
+    }
+    return JSON.stringify(result);
+  }
+
+  function test(){
+    if(checked == true){
+      checked = false;
+      console.log(checked);
+    }else{
+      checked = true;
+      console.log(checked);
+    }
+  }
+
 </script>
 </head>
 <body>
-<div id="myModal" class="modal fade">
-    <div class="modal-dialog">
-      <div class="modal-content">
-             <div class="modal-header">
-                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                 <h4 class="modal-title">Please Upload your CSV File!</h4>
-             </div>
-             <div class="modal-body">
-                 <p>This file will be visually represented with our software.</p>
-                 <form>
-                   <input type="file" id="fileUpload" name="fileUpload" accept=".csv">
-                     <button type="submit" class="btn btn-primary">Submit!</button>
-                 </form>
-             </div>
-         </div>
-    </div>
-</div>
+  <div id="myModal" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content full-modal">
+               <div class="modal-header">
+                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                   <h4 class="modal-title">Please Upload your CSV File</h4>
+               </div>
+               <div class="modal-body">
+                   <p class="modal-description">This file will be visually represented with our software</p>
+                   <form>
+                      <input class="uploader"  type="file" id="fileUpload" name="fileUpload" accept=".csv">
+                      <div class="custom-control custom-checkbox" id = "checkBox">
+                          <input type="checkbox" class="custom-control-input" id="defaultUnchecked" onclick="test();">
+                          <label class="custom-control-label" for="defaultUnchecked">&nbspUse the top row of the .csv as column names</label>
+                      </div>
+                     <div class="submit-btn">
+                      <button type="submit" class="btn" onclick="onClick();">Submit</button>
+                     </div>
+                   </form>
+               </div>
+           </div>
+      </div>
+  </div>
 </body>
 </html>
