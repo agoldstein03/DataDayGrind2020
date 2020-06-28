@@ -309,11 +309,12 @@ function getColumnNameObj() {
 	return Object.fromEntries(columnNames.map((a,b)=>([a, b])));
 }
 
+let restrictions = {};
+
 function renderVisualizations() {
 	newScene();
 	for (const vis of visualizations) {
 		let mapping = {};
-		let restrictions = {};
 		for (const key in vis) {
 			const item = vis[key];
 			if (key != 'type') {
