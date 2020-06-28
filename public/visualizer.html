@@ -22,34 +22,24 @@
   }
 
   function onClick(){
-      const csv = document.getElementById("fileUpload").files[0];
-/*
-      fs.readFile(csv,function (err,data) {
-
-      if (err) {
-        return console.log(err);
-      }
-
-//Convert and store csv information into a buffer.
-      bufferString = data.toString();
-
-//Store information for each individual person in an array index. Split it by every newline in the csv file.
-      arr = bufferString.split('\n');
-      console.log(arr);
-/*
-      for (i = 0; i < arr.length; i++) {
-          JSON.stringify(arr[i]);
-      }
-
-      JSON.parse(arr);
-      res.send(arr);*/
-    });
-    /*
-      if (checked){
-
-      }else{
-
-      }
+    console.log("entered");
+    const csv = document.getElementById("fileUpload").files[0];
+    //This worked but idk what it does so
+    var titles = []
+    //if you use the first row as column names
+      Papa.parse(csv, {
+        complete: function(results){
+          if(checked){
+            titles = results.data[0]
+          }else{
+            for(let i = 0;i < result.data[0].length; i++){
+              titles.push("Column " + i.toString());
+            }
+          },
+        worker: true
+      })
+    }
+    return false;
   }
 
   function csvJSON(csv){
@@ -89,14 +79,14 @@
                </div>
                <div class="modal-body">
                    <p class="modal-description">This file will be visually represented with our software</p>
-                   <form>
+                   <form onsubmit="return onClick();">
                       <input class="uploader"  type="file" id="fileUpload" name="fileUpload" accept=".csv">
                       <div class="custom-control custom-checkbox" id = "checkBox">
                           <input type="checkbox" class="custom-control-input" id="defaultUnchecked" onclick="test();">
                           <label class="custom-control-label" for="defaultUnchecked">&nbspUse the top row of the .csv as column names</label>
                       </div>
                      <div class="submit-btn">
-                      <button type="submit" class="btn" onclick="onClick();">Submit</button>
+                      <button type="submit" class="btn" >Submit</button>
                      </div>
                    </form>
                </div>
