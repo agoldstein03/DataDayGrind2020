@@ -227,6 +227,9 @@ function disposeUI() {
 	}
 }
 
+gui.add({ renderVisualizations }, 'renderVisualizations').name("Render");
+gui.add({ showPopUp }, 'showPopUp').name("New Data");
+
 scene.background = new THREE.Color( 0x333333 );
 let backgroundColor = {Background: "#000000"};
 gui.addColor({Background: "#000000"}, 'Background').onChange(color => {scene.background.set(color)});
